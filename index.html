@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="DeepBionicSyn: Creative 3D Shape Synthesis via Implicit Representation for Organic Biologically Inspired Design">
+  <meta name="keywords" content="Methods & Applications, Modeling/Geometry">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DeepBionicSyn: Creative 3D Shape Synthesis via Implicit Representation for Organic Biologically Inspired Design</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- more work not yet-->
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <!-- Title. -->
+          <h1 class="title is-3 publication-title">DeepBionicSyn:<br/> Creative 3D Shape Synthesis via Implicit Representation for Organic Biologically Inspired Design</h1>
+
+          <!-- Authors. -->
+          <div class="is-size-3 publication-authors">
+            <span class="author-block">Anonymous Authors</span>
+            <!-- <span class="author-block">
+              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
+            </span> -->
+          </div>
+
+          <!-- Institution. -->
+          <!-- <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Washington,</span>
+            <span class="author-block"><sup>2</sup>Google Research</span>
+          </div> -->
+
+          <!-- Links. -->
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="./static/DeepBionicSYN.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/DeepBionicSyn/DeepBionicSyn"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/DeepBionicSyn/DeepBionicSyn"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Teaser. -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <div class="is-centered">
+        <img id="teaser" src="./static/images/teaser.jpg" alt="Teaser" width="100%"
+             style="position: relative; clip: rect(20px, auto, auto, auto);">
+      </div>
+
+
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">DeepBionicSyn</span> generate 3D shapes with a novel implicit representation.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<!--轮播图-->
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Biologically inspired design holds great value for product design.
+            Inspired by geometric features from natural creations, designers can create organic nature-inspired shapes.
+            Traditionally, even for experienced designers, biologically inspired design is related with
+            time-consuming or trial-and-error effort.
+          </p>
+          <p>
+            We propose DeepBionicSyn, an approach for automatic creative 3D biologically inspired design.
+            We view the biologically inspired design problem as an out-of-distribution synthesis problem based
+            on a dataset of natural creations and man-made artifacts. DeepBionicSyn is trained on AC-BIONIC,
+            a large-scale dataset containing 28k reference shapes. We mine the required design candidates in
+            a shared neural parametric representation space of the input dataset using a creativity synthetic solver.
+            Finally, a human-in-the-loop local manifold subspace exploration technique allows designers to explore
+            design variants effectively.
+          </p>
+          <p>
+            Compared with previous three-dimensional generative methods for creativity,
+            our framework can meet organic biologically inspired design requirements and does not require
+            pre-analysis for shape collections. We evaluate the effectiveness of our method on a chair product
+            biologically inspired design task based on the chair-animal hybrid dataset.
+            We introduce a metric for evaluating creative biologically inspired design tasks to quantitatively assess
+            our approach and other potential alternatives.
+          </p>
+        </div>
+
+        <h2 class="title is-3">Methods</h2>
+        <img src="./static/images/methods.png"/>
+        <div class="content has-text-justified">
+          <p>
+            Overview of our framework for 3D biologically inspired design, which combines deep implicit generative modeling
+            and user-in-the-loop interactive. (a) Dataset consist of natural creations as inspiration and man-made artifacts as product target.
+             (b) After training an IMAE, there exist some biologically inspired synthetics in the shape perception boundary in latent space.
+              The trained encoder and decoder form a parametric representation of 3D shape. In latent space, a problem is how to find out
+               creative biologically inspired design. Creativity Synthetic Solver obtains final results via two steps. (c) A hybrid
+               function containing weak-shot classifiers(W-Cls) and quality term is deployed to get high score candidates.
+               Through multimodal optimization sampling, candidates filtered out are recommended to users as if cold start in
+                recommendation. (d) Candidates with high scores are then inputted into a human-in-loop system. The Projector view of the web
+                 interface allows the user to explore the entire design space. After selecting the desired synthetic, a local manifold subspace
+                  search algorithm is employed to explore potential design variants in a slide-bar manner.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div id="video-container" class="container is-max-desktop">
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Demo</h2>
+        <div class="content has-text-centered">
+          <video id="replay-video"
+                 controls
+                 muted
+                 preload
+                 playsinline
+                 width="75%">
+            <source src="./static/videos/teaser.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+    <!--/ Animation. -->
+
+
+    <h2 class="title is-3">Synthetics</h2>
+    <!-- 生成物的视频放到这里来，分成多行，每行4到5列 -->
+    <!--第一行-->
+    <div class="columns is-centered">
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/1.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/2.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/3.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/4.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+    </div>
+    <!--第一行结束-->
+
+     <!--第二行开始-->
+     <div class="columns is-centered">
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/5.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/6.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/15.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+
+      <div class="column">
+        <video id="replay-video"
+                loop
+                autoplay
+                controls
+                muted
+                preload
+                playsinline
+                height="100%">
+          <source src="./static/videos/obj/16.mp4"
+                  type="video/mp4">
+        </video>
+        <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+      </div>
+     </div>
+    <!--第二行结束-->
+
+    <!--第三行开始-->
+    <div class="columns is-centered">
+    <div class="column">
+      <video id="replay-video"
+              loop
+              autoplay
+              controls
+              muted
+              preload
+              playsinline
+              height="100%">
+        <source src="./static/videos/obj/9.mp4"
+                type="video/mp4">
+      </video>
+      <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+    </div>
+
+    <div class="column">
+      <video id="replay-video"
+              loop
+              autoplay
+              controls
+              muted
+              preload
+              playsinline
+              height="100%">
+        <source src="./static/videos/obj/10.mp4"
+                type="video/mp4">
+      </video>
+      <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+    </div>
+
+    <div class="column">
+      <video id="replay-video"
+              loop
+              autoplay
+              controls
+              muted
+              preload
+              playsinline
+              height="100%">
+        <source src="./static/videos/obj/11.mp4"
+                type="video/mp4">
+      </video>
+      <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+    </div>
+
+    <div class="column">
+      <video id="replay-video"
+              loop
+              autoplay
+              controls
+              muted
+              preload
+              playsinline
+              height="100%">
+        <source src="./static/videos/obj/12.mp4"
+                type="video/mp4">
+      </video>
+      <!-- <h4 class="subtitle has-text-centered">A desktop Apple iMac</h4> -->
+    </div>
+    </div>
+    <!--第三行结束-->
+
+
+
+  </div>
+</section>
+
+
+<!-- <section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{park2021nerfies,
+  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
+  title     = {Nerfies: Deformable Neural Radiance Fields},
+  journal   = {ICCV},
+  year      = {2021},
+}</code></pre>
+  </div>
+</section> -->
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website is based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> project page.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="js">
+  var cont = document.getElementById('video-container')
+
+</script>
+</body>
+</html>
